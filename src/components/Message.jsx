@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import moment from "moment";
-import { db } from '../firebase';
-import time from "../Date/Time"
+import { db } from "../firebase";
 
-const Message = ({ message }) => {
+const Message = ({ created_at, message }) => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
@@ -14,7 +13,6 @@ const Message = ({ message }) => {
   useEffect(() => {
     ref.current?.scrollIntoView({ behavior: "auto" });
   }, [message]);
-
   const updateMessageTimestamps = async () => {
     const messagesRef = db.collection('messages');
     const messages = await messagesRef.get();
@@ -28,16 +26,18 @@ const Message = ({ message }) => {
       });
     });
   }
-
-  // Gọi hàm cập nhật thời gian tạo của tin nhắn ở đây
+  const [showTimestamp, setShowTimestamp] = useState(false);
   useEffect(() => {
     updateMessageTimestamps();
   }, []);
+
 
   return (
     <div
       ref={ref}
       className={`message ${message.senderId === currentUser.uid && "owner"}`}
+      onMouseEnter={() => setShowTimestamp(true)}
+      onMouseLeave={() => setShowTimestamp(false)}
     >
       <div className="messageInfo">
         <img
@@ -48,8 +48,13 @@ const Message = ({ message }) => {
           }
           alt=""
         />
-        <span>{moment(message.created_at).format('dd,h:mm:ss a')}</span>
-
+        {showTimestamp && (
+          <div className="timestamp-box">
+            <span className="timestamp">
+              {moment(message.created_at).format("dd,h:mm a")}
+            </span>
+          </div>
+        )}
       </div>
       <div className="messageContent">
         <p>{message.text}</p>

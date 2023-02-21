@@ -20,9 +20,15 @@ const Search = () => {
   const { currentUser } = useContext(AuthContext);
 
   const handleSearch = async () => {
+    if (!username) {
+      setErr(false);
+      setUser(null);
+      return;
+    }
     const q = query(
       collection(db, "users"),
-      where("displayName", "==", username)
+      where("displayName", ">=", username),
+      where("displayName", "<=", username + "\uf8ff")
     );
 
     try {
@@ -30,9 +36,10 @@ const Search = () => {
       querySnapshot.forEach((doc) => {
         setUser(doc.data());
       });
+      setErr(false);
     } catch (err) {
       setErr(true);
-    }
+      }
   };
 
   const handleKey = (e) => {
@@ -101,4 +108,3 @@ const Search = () => {
 };
 
 export default Search;
-//search elastic

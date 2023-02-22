@@ -4,6 +4,7 @@ import Input from './Input';
 import Camera from './Camera';
 import Modal from 'react-modal';
 import { ChatContext } from "../context/ChatContext";
+import DarkMode from './DarkMode';
 
 const Chat = () => {
   const [showCameraModal, setShowCameraModal] = useState(false);
@@ -31,6 +32,7 @@ const Chat = () => {
       <div className="chatInfo">
         <span>{data.user?.displayName}</span>
         <div className="chatIcons">
+        <DarkMode/>
           <img
             src="https://res.cloudinary.com/dijk3xi4c/image/upload/v1676465117/cam_f1a3q2.png"
             alt="Camera"

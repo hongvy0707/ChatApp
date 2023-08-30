@@ -37,10 +37,10 @@ const Login = () => {
           <input type="email" placeholder="Email" />
           <div>
           <input 
-          type={showPassword ? 'text' :'Password'} 
+          type={showPassword ? 'text' :'password'} 
           value={password}
           onChange={(event) => setPassword(event.target.value)} 
-          placeholder="password" 
+          placeholder="Password" 
           /> 
           
           <button type="button" onClick={handleClick}>

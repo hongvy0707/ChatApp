@@ -36,8 +36,6 @@ const Message = ({ created_at, message }) => {
     <div
       ref={ref}
       className={`message ${message.senderId === currentUser.uid && "owner"}`}
-      onMouseEnter={() => setShowTimestamp(true)}
-      onMouseLeave={() => setShowTimestamp(false)}
     >
       <div className="messageInfo">
         <img
@@ -48,18 +46,18 @@ const Message = ({ created_at, message }) => {
           }
           alt=""
         />
-        {showTimestamp && (
-          <div className="timestamp-box">
-            <span className="timestamp">
-              {moment(message.created_at).format("dd,h:mm a")}
-            </span>
-          </div>
-        )}
       </div>
       <div className="messageContent">
         <p>{message.text}</p>
         {message.img && <img src={message.img} alt="" />}
       </div>
+      {showTimestamp && (
+        <div className="timestamp-box">
+          <span className="timestamp">
+            {moment(message.created_at).format("dd,h:mm a")}
+          </span>
+        </div>
+      )}
     </div>
   );
 };

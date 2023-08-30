@@ -8,13 +8,11 @@ import { useNavigate, Link } from "react-router-dom";
 const Register = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [avatarError, setAvatarError] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
   const navigate = useNavigate();
 
-  const handleImageLoad = () => {
-    setImageLoaded(true);
-  };
+  // const handleImageLoad = () => {
+  //   setImageLoaded(true);
+  // };
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -25,9 +23,8 @@ const Register = () => {
     const file = e.target[3].files[0];
 
     // Check if avatar is selected
-    if (!file) {
-      setAvatarError(true);
-      setLoading(false);
+    if (e.target.file.length === 0) {
+      setErr(true);
       return;
     }
 
@@ -110,17 +107,17 @@ const Register = () => {
             type="file"
             id="file"
           />
-          <label htmlFor="file">
+          <label htmlFor="file" className="avatarLabel">
             <img
               src="https://res.cloudinary.com/dijk3xi4c/image/upload/v1676524825/addAvatar_hlwu0u.png"
               alt="AddAvt"
-              onLoad={handleImageLoad}
+              // onLoad={handleImageLoad}
             />
             <span>Add an avatar (*)</span>
           </label>
-          {avatarError && <span style={{ color: "red" }}>Please add an avatar</span>}
+          {err && <span style={{ color: "red" }}>Please add an avatar</span>}
           <button disabled={loading}>Sign up</button>
-          {err && <span>Something went wrong</span>}
+          {err && <span style={{ color: "red" }}>Something went wrong</span>}
         </form>
         <p>
           You do have an account? <Link to="/login">Login</Link>

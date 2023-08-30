@@ -6,13 +6,10 @@ import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
+  const [avatarError, setAvatarError] = useState(false);
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  // const handleImageLoad = () => {
-  //   setImageLoaded(true);
-  // };
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -23,8 +20,8 @@ const Register = () => {
     const file = e.target[3].files[0];
 
     // Check if avatar is selected
-    if (e.target.file.length === 0) {
-      setErr(true);
+    if (!file) {
+      setAvatarError(true);
       return;
     }
 
@@ -98,24 +95,21 @@ const Register = () => {
         <span className="logo">ChatApp</span>
         <span className="title">Register</span>
         <form onSubmit={handleSubmit}>
-          <input required type="text" placeholder="display name" />
-          <input required type="email" placeholder="email" />
-          <input required type="password" placeholder="password" />
-          <input
-            required
-            style={{ display: "none" }}
-            type="file"
-            id="file"
-          />
-          <label htmlFor="file" className="avatarLabel">
-            <img
-              src="https://res.cloudinary.com/dijk3xi4c/image/upload/v1676524825/addAvatar_hlwu0u.png"
-              alt="AddAvt"
-              // onLoad={handleImageLoad}
-            />
-            <span>Add an avatar (*)</span>
-          </label>
-          {err && <span style={{ color: "red" }}>Please add an avatar</span>}
+          <input required type="text" placeholder="Display name" />
+          <input required type="email" placeholder="Email" />
+          <input required type="password" placeholder="Password" />
+          <div className="fileInputContainer">
+            <label>
+              <span className="title">Add an Avatar :</span>
+              <input
+                required
+                type="file"
+                id="file"
+                accept="image/*"
+              />
+            </label>
+          </div>
+          
           <button disabled={loading}>Sign up</button>
           {err && <span style={{ color: "red" }}>Something went wrong</span>}
         </form>

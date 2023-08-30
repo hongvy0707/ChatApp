@@ -2,7 +2,6 @@ import React, { useState, useContext, useRef, useEffect } from 'react';
 import Messages from './Messages';
 import Input from './Input';
 import { ChatContext } from "../context/ChatContext";
-import DarkMode from './DarkMode';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Navbar from 'react-bootstrap/Navbar';
 
@@ -14,7 +13,6 @@ const Chat = () => {
   const [darkModeEnabled, setDarkModeEnabled] = useState(false);
 
   const darkModeHandler = () => {
-    <DarkMode></DarkMode>
     setDarkModeEnabled(!darkModeEnabled);
   };
 
@@ -36,7 +34,6 @@ const Chat = () => {
       <div className="chatInfo">
         <span>{data.user?.displayName}</span>
         <div className="chatIcons">
-          <DarkMode></DarkMode>
           <img
             src="https://res.cloudinary.com/dijk3xi4c/image/upload/v1676465117/cam_f1a3q2.png"
             alt="Camera"
@@ -57,11 +54,6 @@ const Chat = () => {
               <NavDropdown.Item>Action</NavDropdown.Item>
               <NavDropdown.Item>Another Action</NavDropdown.Item>
               <NavDropdown.Divider />
-                {showDarkModeText && (
-                  <NavDropdown.Item>
-                    <DarkMode onClick={darkModeHandler}/>
-                  </NavDropdown.Item>
-                )}
             </NavDropdown>
           </Navbar>
         </div>

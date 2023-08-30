@@ -109,6 +109,7 @@ const Register = () => {
               onLoad={handleImageLoad}
             />
             <span>Add an avatar (*)</span>
+            {avatarError && <span style={{ color: "red" }}>Please add an avatar</span>}
           </label>
           <button disabled={loading}>Sign up</button>
           {err && <span>Something went wrong</span>}

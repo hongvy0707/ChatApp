@@ -43,6 +43,7 @@ const Chat = () => {
               onClick={() => {
                 setDropdownOpen(!dropdownOpen);
               }}
+              ref={dropdownRef}
             >
               <NavDropdown.Item>Action</NavDropdown.Item>
               <NavDropdown.Item>Another Action</NavDropdown.Item>
@@ -52,7 +53,7 @@ const Chat = () => {
         </div>
       </div>
       <Messages />
-      <Input  />
+      <Input />
     </div>
   );
 };

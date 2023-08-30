@@ -34,10 +34,10 @@ const Login = () => {
         <span className="logo">ChatApp</span>
         <span className="title">Login</span>
         <form onSubmit={handleSubmit}>
-          <input type="email" placeholder="email" />
+          <input type="email" placeholder="Email" />
           <div>
           <input 
-          type={showPassword ? 'text' :'password'} 
+          type={showPassword ? 'text' :'Password'} 
           value={password}
           onChange={(event) => setPassword(event.target.value)} 
           placeholder="password" 

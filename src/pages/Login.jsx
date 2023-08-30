@@ -42,13 +42,13 @@ const Login = () => {
           onChange={(event) => setPassword(event.target.value)} 
           placeholder="password" 
           /> 
-          {/* ti lam */}
+          
           <button type="button" onClick={handleClick}>
           <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
           </button>
           </div> 
           <button>Sign in</button>
-          {err && <span>Please check your password and account name and try again.</span>}
+          {err && <span style={{ color: "red" }}>Please check your password and account name and try again.</span>}
         </form>
         <p>You don't have an account? <Link to="/register">Register</Link></p>
       </div>

@@ -8,6 +8,7 @@ import { useNavigate, Link } from "react-router-dom";
 const Register = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [avatarError, setAvatarError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const navigate = useNavigate();
 
@@ -22,6 +23,13 @@ const Register = () => {
     const email = e.target[1].value;
     const password = e.target[2].value;
     const file = e.target[3].files[0];
+
+    // Check if avatar is selected
+    if (!file) {
+      setAvatarError(true);
+      setLoading(false);
+      return;
+    }
 
     try {
       // Create user
